@@ -9,10 +9,10 @@ try:
     print(True_L)
 
 except:
-    print("Please check the link if it is not correct")
+    print("Please check the link if it is not correct") #handling exception
 
 else:
-    print("We got details for True information")
+    print("We got details for True information") #else will run if except block dont
 
 finally:
-    print("Good job, task completed ")
+    print("Good job, task completed ") #finally will run 

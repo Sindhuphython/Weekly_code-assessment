@@ -1,56 +1,58 @@
 import re
 import smtplib
+
+
 while(True):
     name=input("Please Enter Customer Name :")
     email=input("Please Enter the Customer Email Id :")
-    regex12 = '^\w+[\._]?\w+[@]\w+[.]\w{2,3}$'
-    valid12=re.match(regex12,email)
-    if valid12:
-        class Tea:
+    reg = '^\w+[\._]?\w+[@]\w+[.]\w{2,3}$'
+    val=re.match(reg,email)
+    if val:   #if only the details are valid then only the other things run
+        class Tea_pricing:  
             def price_tea(self):
                 self.tea_p=7
                 return self.tea_p
-        class Coffee:
+        class Coffee_pricing:
             def price_coffee(self):
                 self.coffe_p=10 
                 return self.coffe_p
-        class Masala_Dosa:
+        class Masala_Dosa_pricing:
             def price_dosa(self):
                 self.dosa_p=50
                 return self.dosa_p
 
-        class Bill_Order(Coffee,Tea,Masala_Dosa):
+        class Bill_of_Order(Coffee_pricing,Tea_pricing,Masala_Dosa_pricing): #class derived from above three orders
             pass
 
-        billing=Bill_Order()
-        cost=0
+        billing=Bill_of_Order()
+        c=0
 
-        while(True):
+        while(True): #menudriven concept for choosing options for order
 
             print("\nSelect an option from menu ")
-            print("\n")
+            
             print("1. Tea (Rs.7)")
             print("2. Coffee (Rs.10)")
             print("3. Masala Dosa (Rs.50)")
             print("4. View Bill and Email ")
             choice=int(input("Enter your Order choice: "))
             if choice==1:
-                print("\nTea selected")
-                teap=billing.price_tea()
-                cost+=teap
+                print("Tea selected")
+                tea=billing.price_tea()
+                c+=tea
             if choice==2:
-                print("\nCoffee selected")
+                print("Coffee selected")
                 cofp=billing.price_coffee()
-                cost+=cofp
+                c+=cofp
             if choice==3:
-                print("\nMasala Dosa Selected")
-                dosap=billing.price_dosa()
-                cost+=dosap
+                print("Masala Dosa Selected")
+                dosa=billing.price_dosa()
+                c+=dosa
             if choice==4:
-                print("Your Bill ")
-                print("RS",cost)
-                cost=str(cost)
-                connection=smtplib.SMTP("smtp.gmail.com",587)
+                print("Your bill is Rs :",c)
+    
+                cost=str(c)
+                connection=smtplib.SMTP("smtp.gmail.com",587)  #sending email to user
                 connection.starttls()
                 connection.login("hariompateldada@gmail.com","Sparsh@01")
                 connection.sendmail("hariompateldada@gmail.com",email,cost)
